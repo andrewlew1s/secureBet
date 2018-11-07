@@ -39,7 +39,7 @@ public class subclass extends JFrame{
 		
 		database db = new database();
 		ArrayList<String> player = db.getData();
-		//Array list to string array to string conversion. Why is life
+		//Array list to string array to string conversion
 		String array[] = new String[player.size()];              
 		for(int j =0;j<player.size();j++){
 		  array[j] = player.get(j);
