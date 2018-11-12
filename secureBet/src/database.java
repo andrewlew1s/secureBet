@@ -3,6 +3,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.xml.bind.DatatypeConverter;
 
@@ -13,6 +14,8 @@ import java.security.SecureRandom;
 
 //MYSQL DB MANAGEMENT
 public class database{
+	
+	public static List<byte[]> trackSalts = new ArrayList<byte[]>();
 		
 	public static Connection getConnection() throws Exception{
 		try {
@@ -104,24 +107,55 @@ public class database{
 //			
 //	}
 	
-	public static ArrayList<String> getSalt() {
-		ArrayList<String> array = new ArrayList<String>();
-		byte[] bytes = new byte[20];
-
+	//Returns salt as string array - not that helpful
+	public static List<Integer> getSaltId() {
+		List<Integer> list = new ArrayList<Integer>();
 		
 		try {
 			Connection con = getConnection();
+			PreparedStatement saltIDCheck = con.prepareStatement("SELECT id FROM auth");
 			PreparedStatement saltCheck = con.prepareStatement("SELECT salt FROM auth");
+			ResultSet saltIDResult = saltIDCheck.executeQuery();
 			ResultSet saltResult = saltCheck.executeQuery();
-			while(saltResult.next()) {
-				array.add(saltResult.getString("salt"));
-				System.out.println(array);
+			while(saltIDResult.next()) {
+				list.add(saltIDResult.getInt("id"));
+				list.add(saltResult.getInt("salt"));
+				System.out.println(list);
 			
 			}}catch(Exception e) {System.out.print(e);}
 
-		return array;
+		return list;
 	}
 	
+	//tested and works
+	public static boolean emailExists(String email) throws Exception{
+		try {
+			Connection con = getConnection();
+			PreparedStatement statement = con.prepareStatement("SELECT email FROM auth");
+			boolean validator = false;
+			
+			ResultSet result = statement.executeQuery();
+			ArrayList<String> array = new ArrayList<String>();
+			while(result.next()) {
+				array.add(result.getString("email"));
+			}
+			for(int i=0; i<array.size(); i++) {
+				String individualEmail = array.get(i);
+				if(individualEmail == email){
+					validator = true;
+				}else {
+					validator = false;
+				}
+			}
+			if(validator = true) {
+				return true;		
+			} else {
+				return false;
+			}
+		}catch(Exception e) {System.out.print(e);}
+		return false;
+		
+	}
 		
 	
 	//PASSWORD PROTECTION
@@ -138,7 +172,8 @@ public class database{
 		byte[] bytes = new byte[20];
 		SecureRandom random = new SecureRandom();
 		random.nextBytes(bytes);
-		System.out.println(bytes);
+		trackSalts.add(bytes);
+		System.out.println(trackSalts);
 		return bytes;
 	}
 }

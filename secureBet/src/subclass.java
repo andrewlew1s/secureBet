@@ -7,6 +7,7 @@ import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
+import java.util.List;
 import java.awt.event.ActionEvent;
 import javax.swing.*;
 import javax.swing.text.BadLocationException;
@@ -215,8 +216,7 @@ public class subclass extends JFrame{
 					String hashPassAttempt;
 //					try {
 //						boolean authenticated = false;
-//						ArrayList<String> userSalt= db.getSalt();
-//						System.out.print(userSalt);
+//						List<byte[]> userSalts= db.trackSalts;
 //						hashPassAttempt = db.generateHash(passwordattempt, "SHA-256", userSalt);
 //						System.out.println(hashPassAttempt);
 //						authenticated = db.authenticate(usernameattempt, hashPassAttempt);
