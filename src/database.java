@@ -47,4 +47,20 @@ public class database{
 		
 	}
 	
+	public static void createPlayer(String first, String last, String email) throws Exception {
+		final String var1 = first;
+		final String var2 = last;
+		final String var3 = email;
+		final float defaultBalance = 0;
+		try {
+			Connection con = getConnection();
+			PreparedStatement playerdata = con.prepareStatement("INSERT INTO player (first_name, last_name, email, balance) VALUES ('"+var1+"','"+var2+"','"+var3+"',(0))");
+			
+			playerdata.executeUpdate();
+		} catch(Exception e) {System.out.println(e);}
+		finally {
+			System.out.println("Insert complete.");
+		}
+	}
+	
 }

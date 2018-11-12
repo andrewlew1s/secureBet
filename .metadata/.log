@@ -1,14 +1,10 @@
-!SESSION 2018-11-07 12:36:17.695 -----------------------------------------------
-eclipse.buildId=4.7.3.M20180330-0640
-java.version=1.8.0_144
+!SESSION 2018-10-20 20:35:50.721 -----------------------------------------------
+eclipse.buildId=4.6.3.M20170301-0400
+java.version=1.8.0_101
 java.vendor=Oracle Corporation
-BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_GB
-Framework arguments:  -product org.eclipse.epp.package.java.product C:\Users\Andrew Lewis\Desktop\Pomona CS\betting_simulator\betting_simulator\src\database.java
-Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.java.product C:\Users\Andrew Lewis\Desktop\Pomona CS\betting_simulator\betting_simulator\src\database.java
+BootLoader constants: OS=macosx, ARCH=x86_64, WS=cocoa, NL=en_US
+Framework arguments:  -product org.eclipse.epp.package.java.product -keyring /Users/andrewlewis/.eclipse_keyring
+Command-line arguments:  -os macosx -ws cocoa -arch x86_64 -product org.eclipse.epp.package.java.product -keyring /Users/andrewlewis/.eclipse_keyring
 
-!ENTRY org.eclipse.egit.ui 2 0 2018-11-07 12:37:03.700
-!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
-user global configuration and to define the default location to store repositories: 'C:\Users\Andrew Lewis'. If this is
-not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
-EGit might behave differently since they see different configuration options.
-This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+!ENTRY org.eclipse.core.net 1 0 2018-10-20 20:36:07.967
+!MESSAGE System property http.nonProxyHosts has been set to local|*.local|169.254/16|*.169.254/16 by an external source. This value will be overwritten using the values from the preferences

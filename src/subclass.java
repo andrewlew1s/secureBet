@@ -23,14 +23,28 @@ public class subclass extends JFrame{
 	private JMenu loginpage;
 	private JMenuItem open;
 	private JMenuItem close;
+	private JMenuItem signup;
 	private JTextField username;
+	private JTextField emailaddr;
+	private JTextField first_name;
+	private JTextField last_name;
 	private JPasswordField password;
+	private JPasswordField password2;
 	private JPanel panel;
+	private JPanel panel2;
 	private String s = "";
 	private String s2 = "";
-	private String usernameinformation;
-	private String passwordinformation;
-	
+	private String s3 = "";
+	private String s4 = "";
+	private String s5 = "";
+	private String s6 = "";
+	private String usernameattempt;
+	private String emailInfo;
+	private String firstNameInfo;
+	private String lastNameInfo;
+	private String passwordInfo;
+	private String passwordattempt;
+
 	public subclass() throws Exception{
 		
 		super("Betting Simulator");//Title of program
@@ -39,7 +53,7 @@ public class subclass extends JFrame{
 		
 		database db = new database();
 		ArrayList<String> player = db.getData();
-		//Array list to string array to string conversion
+		//Array list to string array to string conversion. Why is life
 		String array[] = new String[player.size()];              
 		for(int j =0;j<player.size();j++){
 		  array[j] = player.get(j);
@@ -92,6 +106,9 @@ public class subclass extends JFrame{
 		loginpage.addSeparator();
 		close = new JMenuItem("Logout");
 		loginpage.add(close);
+		loginpage.addSeparator();
+		signup = new JMenuItem("Sign Up");
+		loginpage.add(signup);
 		setJMenuBar(menuBar);
 		
 		game1 = new JLabel("Enter a bet for Game 1: ");
@@ -106,6 +123,7 @@ public class subclass extends JFrame{
 		bet2 = new JTextField("", 5);
 		add(bet2);
 		
+		
 		//Login pop-up
 		panel = new JPanel(new BorderLayout(5, 5));
 		JPanel label = new JPanel(new GridLayout(0, 1, 2, 2));
@@ -118,12 +136,32 @@ public class subclass extends JFrame{
 	    password = new JPasswordField(20);
 	    controls.add(password);
 	    panel.add(controls, BorderLayout.CENTER);
+	    
+	    //Sign Up pop-up
+  		panel2 = new JPanel(new BorderLayout(5, 5));
+  		JPanel label2 = new JPanel(new GridLayout(0, 1, 2, 2));
+  	    label2.add(new JLabel("First Name", SwingConstants.RIGHT));
+  	    label2.add(new JLabel("Last Name", SwingConstants.RIGHT));
+	    label2.add(new JLabel("E-Mail", SwingConstants.RIGHT));
+  	    label2.add(new JLabel("Password", SwingConstants.RIGHT));
+  	    panel.add(label2, BorderLayout.WEST);
+  	    JPanel controls2 = new JPanel(new GridLayout(0, 1, 2, 2));
+  	    first_name = new JTextField(20);
+  	    controls2.add(first_name);
+  	    last_name = new JTextField(20);
+  	    controls2.add(last_name);
+  	    emailaddr = new JTextField(20);
+  	    controls2.add(emailaddr);
+  	    password2 = new JPasswordField(20);
+  	    controls2.add(password2);
+  	    panel.add(controls2, BorderLayout.CENTER);
 	   				
 		thehandler handler = new thehandler();//builds an action listener object - handles enter key or mouse click events
 		bet1.addActionListener(handler);
 		bet2.addActionListener(handler);
 		open.addActionListener(handler);
 		close.addActionListener(handler);
+		signup.addActionListener(handler);
 		
 	}
 	
@@ -136,6 +174,8 @@ public class subclass extends JFrame{
 		public void actionPerformed(ActionEvent event){
 			
 			String string = "";
+			database db = new database();
+
 			//event default binds to enter key but can be changed
 			if(event.getSource()==bet1){
 				string=String.format("You bet: %s", event.getActionCommand()); //getActionCommand = get text from a location
@@ -145,13 +185,30 @@ public class subclass extends JFrame{
 				string=String.format("You bet: %s", event.getActionCommand()); 
 				JOptionPane.showMessageDialog(null, string);
 			}
+			else if (event.getSource()==signup){
+				JOptionPane.showConfirmDialog(
+			            null, panel, "Sign Up", JOptionPane.OK_CANCEL_OPTION);
+					//store login data here for now (it displays):
+				 	firstNameInfo = s3.concat(first_name.getText());
+				 	lastNameInfo = s4.concat(last_name.getText());
+				 	emailInfo = s5.concat(emailaddr.getText());
+				    passwordInfo = s6.concat(new String(password2.getPassword()));
+					string=String.format("First Name: " + firstNameInfo + " Last Name: " + lastNameInfo + "Email: " + emailInfo + "Password: " + passwordInfo); 
+					JOptionPane.showMessageDialog(null, string);
+					try {
+						db.createPlayer(firstNameInfo, lastNameInfo, emailInfo);
+					} catch (Exception e) {
+						System.out.println(e);
+					}
+				// TODO incorporate actual login w/DB later
+			}
 			else if (event.getSource()==open){
 				JOptionPane.showConfirmDialog(
 			            null, panel, "login", JOptionPane.OK_CANCEL_OPTION);
 					//store login data here for now (it displays):
-				 	usernameinformation = s.concat(username.getText());
-				    passwordinformation = s2.concat(new String(password.getPassword()));
-					string=String.format("Username: " + usernameinformation + " Password: " + passwordinformation); 
+				 	usernameattempt = s.concat(username.getText());
+				    passwordattempt = s2.concat(new String(password.getPassword()));
+					string=String.format("Username: " + usernameattempt + " Password: " + passwordattempt); 
 					JOptionPane.showMessageDialog(null, string);
 				// TODO incorporate actual login w/DB later
 			}
