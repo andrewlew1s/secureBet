@@ -5,11 +5,13 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.*;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.StyledDocument;
+import javax.xml.bind.DatatypeConverter;
 
 public class subclass extends JFrame{ 
 	
@@ -144,7 +146,7 @@ public class subclass extends JFrame{
   	    label2.add(new JLabel("Last Name", SwingConstants.RIGHT));
 	    label2.add(new JLabel("E-Mail", SwingConstants.RIGHT));
   	    label2.add(new JLabel("Password", SwingConstants.RIGHT));
-  	    panel.add(label2, BorderLayout.WEST);
+  	    panel2.add(label2, BorderLayout.WEST);
   	    JPanel controls2 = new JPanel(new GridLayout(0, 1, 2, 2));
   	    first_name = new JTextField(20);
   	    controls2.add(first_name);
@@ -154,7 +156,7 @@ public class subclass extends JFrame{
   	    controls2.add(emailaddr);
   	    password2 = new JPasswordField(20);
   	    controls2.add(password2);
-  	    panel.add(controls2, BorderLayout.CENTER);
+  	    panel2.add(controls2, BorderLayout.CENTER);
 	   				
 		thehandler handler = new thehandler();//builds an action listener object - handles enter key or mouse click events
 		bet1.addActionListener(handler);
@@ -176,7 +178,6 @@ public class subclass extends JFrame{
 			String string = "";
 			database db = new database();
 
-			//event default binds to enter key but can be changed
 			if(event.getSource()==bet1){
 				string=String.format("You bet: %s", event.getActionCommand()); //getActionCommand = get text from a location
 				JOptionPane.showMessageDialog(null, string);
@@ -185,9 +186,10 @@ public class subclass extends JFrame{
 				string=String.format("You bet: %s", event.getActionCommand()); 
 				JOptionPane.showMessageDialog(null, string);
 			}
+			//Sign Up functional
 			else if (event.getSource()==signup){
 				JOptionPane.showConfirmDialog(
-			            null, panel, "Sign Up", JOptionPane.OK_CANCEL_OPTION);
+			            null, panel2, "Sign Up", JOptionPane.OK_CANCEL_OPTION);
 					//store login data here for now (it displays):
 				 	firstNameInfo = s3.concat(first_name.getText());
 				 	lastNameInfo = s4.concat(last_name.getText());
@@ -196,13 +198,13 @@ public class subclass extends JFrame{
 					string=String.format("First Name: " + firstNameInfo + " Last Name: " + lastNameInfo + "Email: " + emailInfo + "Password: " + passwordInfo); 
 					JOptionPane.showMessageDialog(null, string);
 					try {
-						db.createPlayer(firstNameInfo, lastNameInfo, emailInfo);
+						db.createPlayer(firstNameInfo, lastNameInfo, emailInfo, passwordInfo);
 					} catch (Exception e) {
 						System.out.println(e);
 					}
-				// TODO incorporate actual login w/DB later
 			}
-			else if (event.getSource()==open){
+			//login w/DB in progress
+			else if (event.getSource()==open) {
 				JOptionPane.showConfirmDialog(
 			            null, panel, "login", JOptionPane.OK_CANCEL_OPTION);
 					//store login data here for now (it displays):
@@ -210,7 +212,23 @@ public class subclass extends JFrame{
 				    passwordattempt = s2.concat(new String(password.getPassword()));
 					string=String.format("Username: " + usernameattempt + " Password: " + passwordattempt); 
 					JOptionPane.showMessageDialog(null, string);
-				// TODO incorporate actual login w/DB later
+					String hashPassAttempt;
+//					try {
+//						boolean authenticated = false;
+//						ArrayList<String> userSalt= db.getSalt();
+//						System.out.print(userSalt);
+//						hashPassAttempt = db.generateHash(passwordattempt, "SHA-256", userSalt);
+//						System.out.println(hashPassAttempt);
+//						authenticated = db.authenticate(usernameattempt, hashPassAttempt);
+//						if(authenticated==true) {
+//							System.out.println("Correct user info");
+//						} else {
+//							System.out.println("Incorrect user info");
+//						}
+//					} catch (NoSuchAlgorithmException e) {
+//						//catch block
+//						e.printStackTrace();
+//					}
 			}
 			else if (event.getSource()==close)
 				 JOptionPane.showConfirmDialog(null, "Are you sure you want to log out?","Warning",JOptionPane.YES_NO_OPTION);
