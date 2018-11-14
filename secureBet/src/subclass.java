@@ -58,6 +58,7 @@ public class subclass extends JFrame{
 	private String lastNameInfo;
 	private String passwordInfo;
 	private String passwordattempt;
+	public boolean authenticated;
 
 	public subclass() throws Exception{
 		
@@ -209,13 +210,13 @@ public class subclass extends JFrame{
 				    passwordInfo = s6.concat(new String(password2.getPassword()));
 					string=String.format("First Name: " + firstNameInfo + " Last Name: " + lastNameInfo + "Email: " + emailInfo + "Password: " + passwordInfo); 
 					JOptionPane.showMessageDialog(null, string);
-					try {
+					try { //stores info to DB and creates a "player"
 						db.createPlayer(firstNameInfo, lastNameInfo, emailInfo, passwordInfo);
 					} catch (Exception e) {
 						System.out.println(e);
 					}
 			}
-			//login w/DB in progress CAN DO IT VIA TRACKSALTS!!
+			//login w/mySQLDB passwords are SHA-256 HASHED W/SALT
 			else if (event.getSource()==open) {
 				JOptionPane.showConfirmDialog(
 			            null, panel, "login", JOptionPane.OK_CANCEL_OPTION);
@@ -225,74 +226,41 @@ public class subclass extends JFrame{
 					string=String.format("Username: " + usernameattempt + " Password: " + passwordattempt); 
 					JOptionPane.showMessageDialog(null, string);
 					String hashPassAttempt;
-					String hex = null;
+
 					try {
-						boolean authenticated = false;
-						if(db.emailExists(usernameattempt)) {
+						if(db.emailExists(usernameattempt)) { 
+							
+							//if the email exists
 							
 							Connection con = db.getConnection();
 							PreparedStatement saltEmail = con.prepareStatement("SELECT salt FROM auth WHERE email= '" + usernameattempt + "'");
-							System.out.println("prepared statement: " + saltEmail);
-							byte[] hashSalt = new byte[20];
-
 							ResultSet saltEmailResult = saltEmail.executeQuery();
+							
+							//get salt from row associated w/email and while that is a thing check that the hashed attempted password = hashed true password from DB
+							
 							while(saltEmailResult.next()) {
 								String s = saltEmailResult.getString("salt");
-								System.out.println(db.generateHash(passwordattempt, "SHA-256", s));							
-
-//								List<byte[]> array2 = new ArrayList<>(20);
-//								for(int i =0;i<array2.size(); i++) {
-//								    baos.write(hashSalt);
-//								    hashSalt = baos.toByteArray();
-//								}
-//								s = array2.get(0);
-//								byte[] saltBytes = s.getBytes("UTF-8");
-//								for (int i = 0; i < array2.size() ; ++i)
-//								{
-//								hashSalt[i] = Byte.valueOf(s);
-//								}
-//								
-//								hashPassAttempt = db.generateHash(passwordattempt, "SHA-256", saltBytes);
-								
-								System.out.println("this is a hash string of bytes!:" + s);
-
-//								System.out.println("this is the password attempt!" + hashPassAttempt);
-							
-								
-								
-
-							}}
+								PreparedStatement passOfEmail = con.prepareStatement("SELECT password FROM auth WHERE email= '" + usernameattempt + "'");
+								ResultSet passOfEmailResult = passOfEmail.executeQuery();
+								while(passOfEmailResult.next()) {
+									String truePass = passOfEmailResult.getString("password");
+									String attemptPass = db.generateHash(passwordattempt, "SHA-256", s);
+									if(truePass.equals(attemptPass)) {
+										System.out.println("Password entered is true!");
+										authenticated = true;
+								} else {
+									System.out.println("Password entered is false!");									
+								}
+								}
+							}
+						}
 					}catch (Exception e) {
-						System.out.println(e);
-					}
-			}
-			
+						System.out.println(e);}
+					}			
 			else if (event.getSource()==close) {
 				 JOptionPane.showConfirmDialog(null, "Are you sure you want to log out?","Warning",JOptionPane.YES_NO_OPTION);
 				// TODO incorporate actual logout w/DB later
-			}
-					
+			}							
 		}
-	}
-	}
-
-
-
-			
-
-////List<byte[]> userSalts= db.trackSalts;
-//hashPassAttempt = db.generateHash(passwordattempt, "SHA-256", userSalt);
-//System.out.println(hashPassAttempt);
-//authenticated = db.authenticate(usernameattempt, hashPassAttempt);
-//if(authenticated==true) {
-//System.out.println("Correct user info");
-//} else {
-//System.out.println("Incorrect user info");
-//}
-////} catch (NoSuchAlgorithmException e) {
-//////catch block
-////e.printStackTrace();
-////}
-
-
-
+	}	
+}

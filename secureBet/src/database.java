@@ -87,37 +87,6 @@ public class database{
 			System.out.println("Insert complete.");
 	}
 	
-//	authentication doesn't work yet
-//	public static boolean authenticate(String emailID,String hashedPassword) {
-//		boolean validator = false;
-//		try {
-//			Connection con = getConnection();
-//			PreparedStatement emailCheck = con.prepareStatement("SELECT email FROM auth");
-//			PreparedStatement passwordCheck = con.prepareStatement("SELECT password FROM auth");
-//
-//			ResultSet emailResult = emailCheck.executeQuery();
-//			String x = emailResult.getString("email");
-//			System.out.println(x);
-//
-//			ResultSet passwordResult = passwordCheck.executeQuery();
-//			String y = passwordResult.getString("password");
-//			System.out.println(y);
-//
-//			if(emailID == emailResult.getString("email") && hashedPassword == passwordResult.getString("password")) {
-//				System.out.println("User authenticated");
-//				validator = true;
-//			} else {
-//				System.out.println("Not authenticated");//DO NOTHING
-//			}
-//		} catch(Exception e) {System.out.print(e);}	
-//		if(validator==true) {
-//			return true;
-//		} else {
-//			return false;
-//		}
-			
-//	}
-	
 	//Returns salt as string array - not that helpful
 	public static List<Integer> getSaltId() {
 		List<Integer> list = new ArrayList<Integer>();
@@ -158,12 +127,6 @@ public class database{
 				if(individualEmails.contains(email)){ //if email exists return salt
 					System.out.println("true if");
 					validator = true;
-				
-					
-//
-//					byte[] saltOfEmail = saltEmailResult.getBytes("salt");
-//					System.out.println("salt of email: " + saltOfEmail);
-
 				}else {
 					validator = false;
 				}
