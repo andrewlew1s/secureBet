@@ -7,6 +7,8 @@ import java.util.List;
 
 import javax.xml.bind.DatatypeConverter;
 
+import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
@@ -16,6 +18,8 @@ import java.security.SecureRandom;
 public class database{
 	
 	public static List<byte[]> trackSalts = new ArrayList<byte[]>();
+	byte[] indexByte;
+
 		
 	public static Connection getConnection() throws Exception{
 		try {
@@ -64,7 +68,14 @@ public class database{
 		final String var3 = email;
 		final float defaultBalance = 0;
 		byte[] saltID = createSalt();
-		String hashP = generateHash(password, "SHA-256", saltID);
+		trackSalts.add(saltID);
+		String saltStr= saltID.toString();
+
+		System.out.println("in db " + saltID);
+		System.out.println("string" + saltStr);
+		String hashP = generateHash(password, "SHA-256", saltStr);
+		System.out.println("hashP" + hashP);
+
 		try {
 			Connection con = getConnection();
 			PreparedStatement playerdata = con.prepareStatement("INSERT INTO player (first_name, last_name, email, balance) VALUES ('"+var1+"','"+var2+"','"+var3+"',(0))");
@@ -76,7 +87,7 @@ public class database{
 			System.out.println("Insert complete.");
 	}
 	
-	//authentication doesn't work yet
+//	authentication doesn't work yet
 //	public static boolean authenticate(String emailID,String hashedPassword) {
 //		boolean validator = false;
 //		try {
@@ -104,7 +115,7 @@ public class database{
 //		} else {
 //			return false;
 //		}
-//			
+			
 //	}
 	
 	//Returns salt as string array - not that helpful
@@ -140,29 +151,41 @@ public class database{
 				array.add(result.getString("email"));
 			}
 			for(int i=0; i<array.size(); i++) {
-				String individualEmail = array.get(i);
-				if(individualEmail == email){
+				String individualEmails = array.get(i);
+				System.out.println(individualEmails);
+				
+
+				if(individualEmails.contains(email)){ //if email exists return salt
+					System.out.println("true if");
 					validator = true;
+				
+					
+//
+//					byte[] saltOfEmail = saltEmailResult.getBytes("salt");
+//					System.out.println("salt of email: " + saltOfEmail);
+
 				}else {
 					validator = false;
 				}
 			}
 			if(validator = true) {
-				return true;		
+				System.out.println("got here");
+				return true;
+
 			} else {
 				return false;
 			}
-		}catch(Exception e) {System.out.print(e);}
+		}catch(Exception e) {System.out.print(e + "me");}
 		return false;
 		
 	}
-		
 	
 	//PASSWORD PROTECTION
-	public static String generateHash(String data, String algorithm, byte[] salt) throws NoSuchAlgorithmException {
+	public static String generateHash(String data, String algorithm, String salt) throws NoSuchAlgorithmException, UnsupportedEncodingException {
 		MessageDigest digest = MessageDigest.getInstance(algorithm);
 		digest.reset();
-		digest.update(salt);
+		byte[] saltBytes = salt.getBytes("UTF-8");
+		digest.update(saltBytes);
 		byte[] hash = digest.digest(data.getBytes());
 		String hex=DatatypeConverter.printHexBinary(hash);
 		return hex;
@@ -172,8 +195,8 @@ public class database{
 		byte[] bytes = new byte[20];
 		SecureRandom random = new SecureRandom();
 		random.nextBytes(bytes);
-		trackSalts.add(bytes);
-		System.out.println(trackSalts);
+		System.out.println(bytes);
+		
 		return bytes;
 	}
 }

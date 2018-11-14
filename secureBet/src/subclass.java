@@ -5,14 +5,25 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.nio.charset.StandardCharsets;
 import java.security.NoSuchAlgorithmException;
+import java.sql.Blob;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.awt.event.ActionEvent;
 import javax.swing.*;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.StyledDocument;
 import javax.xml.bind.DatatypeConverter;
+
 
 public class subclass extends JFrame{ 
 	
@@ -204,7 +215,7 @@ public class subclass extends JFrame{
 						System.out.println(e);
 					}
 			}
-			//login w/DB in progress
+			//login w/DB in progress CAN DO IT VIA TRACKSALTS!!
 			else if (event.getSource()==open) {
 				JOptionPane.showConfirmDialog(
 			            null, panel, "login", JOptionPane.OK_CANCEL_OPTION);
@@ -214,29 +225,74 @@ public class subclass extends JFrame{
 					string=String.format("Username: " + usernameattempt + " Password: " + passwordattempt); 
 					JOptionPane.showMessageDialog(null, string);
 					String hashPassAttempt;
-//					try {
-//						boolean authenticated = false;
-//						List<byte[]> userSalts= db.trackSalts;
-//						hashPassAttempt = db.generateHash(passwordattempt, "SHA-256", userSalt);
-//						System.out.println(hashPassAttempt);
-//						authenticated = db.authenticate(usernameattempt, hashPassAttempt);
-//						if(authenticated==true) {
-//							System.out.println("Correct user info");
-//						} else {
-//							System.out.println("Incorrect user info");
-//						}
-//					} catch (NoSuchAlgorithmException e) {
-//						//catch block
-//						e.printStackTrace();
-//					}
+					String hex = null;
+					try {
+						boolean authenticated = false;
+						if(db.emailExists(usernameattempt)) {
+							
+							Connection con = db.getConnection();
+							PreparedStatement saltEmail = con.prepareStatement("SELECT salt FROM auth WHERE email= '" + usernameattempt + "'");
+							System.out.println("prepared statement: " + saltEmail);
+							byte[] hashSalt = new byte[20];
+
+							ResultSet saltEmailResult = saltEmail.executeQuery();
+							while(saltEmailResult.next()) {
+								String s = saltEmailResult.getString("salt");
+								System.out.println(db.generateHash(passwordattempt, "SHA-256", s));							
+
+//								List<byte[]> array2 = new ArrayList<>(20);
+//								for(int i =0;i<array2.size(); i++) {
+//								    baos.write(hashSalt);
+//								    hashSalt = baos.toByteArray();
+//								}
+//								s = array2.get(0);
+//								byte[] saltBytes = s.getBytes("UTF-8");
+//								for (int i = 0; i < array2.size() ; ++i)
+//								{
+//								hashSalt[i] = Byte.valueOf(s);
+//								}
+//								
+//								hashPassAttempt = db.generateHash(passwordattempt, "SHA-256", saltBytes);
+								
+								System.out.println("this is a hash string of bytes!:" + s);
+
+//								System.out.println("this is the password attempt!" + hashPassAttempt);
+							
+								
+								
+
+							}}
+					}catch (Exception e) {
+						System.out.println(e);
+					}
 			}
-			else if (event.getSource()==close)
+			
+			else if (event.getSource()==close) {
 				 JOptionPane.showConfirmDialog(null, "Are you sure you want to log out?","Warning",JOptionPane.YES_NO_OPTION);
 				// TODO incorporate actual logout w/DB later
+			}
+					
 		}
 	}
-}
+	}
 
+
+
+			
+
+////List<byte[]> userSalts= db.trackSalts;
+//hashPassAttempt = db.generateHash(passwordattempt, "SHA-256", userSalt);
+//System.out.println(hashPassAttempt);
+//authenticated = db.authenticate(usernameattempt, hashPassAttempt);
+//if(authenticated==true) {
+//System.out.println("Correct user info");
+//} else {
+//System.out.println("Incorrect user info");
+//}
+////} catch (NoSuchAlgorithmException e) {
+//////catch block
+////e.printStackTrace();
+////}
 
 
 

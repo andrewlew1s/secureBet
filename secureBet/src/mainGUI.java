@@ -16,7 +16,7 @@ class mainGUI{
 		x.setSize(600,300);
 		x.setBackground(Color.WHITE);
 		x.setVisible(true);
-		//check out the options typing "x." - they r cool
+//		database db = new database();
 	}
 	
 }
