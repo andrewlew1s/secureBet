@@ -1,0 +1,102 @@
+Dec 20, 2018 2:10:40 PM Server main
+INFO: Player creation attempted with this data: PLAYER:/CC/CC/CC@gmail.com/ccccccc1
+Dec 20, 2018 2:10:41 PM Server main
+WARNING: Sign-Up success by: CC CCwith this email: CC@gmail.com
+Dec 20, 2018 2:11:01 PM Server main
+WARNING: login success with this email: CC@gmail.com
+Dec 20, 2018 2:11:18 PM Server main
+INFO: Balance request made by: CC at emailID in player table = 3
+Dec 20, 2018 2:11:48 PM Server main
+WARNING: login success with this email: CC@gmail.com
+Dec 20, 2018 2:19:30 PM Server main
+SEVERE: Login was attempted with this email: AA@gmail.com but had wrong password. Added to failed login count.
+Dec 20, 2018 2:19:35 PM Server main
+SEVERE: Login was attempted with this email: AA@gmail.com but had wrong password. Added to failed login count.
+Dec 20, 2018 2:19:39 PM Server main
+SEVERE: Login was attempted with this email: AA@gmail.com but had wrong password. Added to failed login count.
+Dec 20, 2018 2:19:45 PM Server main
+SEVERE: Login was attempted with this email: AA@gmail.com but had wrong password. Added to failed login count.
+Dec 20, 2018 2:19:51 PM Server main
+SEVERE: Login was attempted with this email: AA@gmail.com but had wrong password. Added to failed login count.
+Dec 20, 2018 2:19:56 PM Server main
+SEVERE: Login was attempted with this email: AA@gmail.com but had wrong password. Added to failed login count.
+Dec 20, 2018 2:20:02 PM Server main
+SEVERE: Login was attempted with this email: AA@gmail.com but had wrong password. Added to failed login count.
+Dec 20, 2018 2:20:11 PM Server main
+SEVERE: Login was attempted with this email: AA@gmail.com but had wrong password. Added to failed login count.
+Dec 20, 2018 2:20:52 PM Server main
+SEVERE: Login was attempted with this email: AA@gmail.com but had wrong password. Added to failed login count.
+Dec 20, 2018 2:20:56 PM Server main
+SEVERE: Login was attempted with this email: AA@gmail.com but had wrong password. Added to failed login count.
+Dec 20, 2018 2:21:00 PM Server main
+SEVERE: Login was attempted with this email: AA@gmail.com but had wrong password. Added to failed login count.
+Dec 20, 2018 2:21:03 PM Server main
+SEVERE: Login was attempted with this email: AA@gmail.com but had wrong password. Added to failed login count.
+Dec 20, 2018 2:21:06 PM Server main
+SEVERE: Login was attempted with this email: AA@gmail.com but had wrong password. Added to failed login count.
+Dec 20, 2018 2:21:10 PM Server main
+SEVERE: Login was attempted with this email: AA@gmail.com but had wrong password. Added to failed login count.
+Dec 20, 2018 2:21:14 PM Server main
+SEVERE: Login was attempted with this email: AA@gmail.com but had wrong password. Added to failed login count.
+Dec 20, 2018 2:21:17 PM Server main
+SEVERE: Login was attempted with this email: AA@gmail.com but had wrong password. Added to failed login count.
+Dec 20, 2018 2:21:20 PM Server main
+SEVERE: Login was attempted with this email: AA@gmail.com but had wrong password. Added to failed login count.
+Dec 20, 2018 2:21:24 PM Server main
+SEVERE: Login was attempted with this email: AA@gmail.com but had wrong password. Added to failed login count.
+Dec 20, 2018 2:21:28 PM Server main
+SEVERE: Login was attempted with this email: AA@gmail.com but had wrong password. Added to failed login count.
+Dec 20, 2018 2:21:32 PM Server main
+SEVERE: Login was attempted with this email: AA@gmail.com but had wrong password. Added to failed login count.
+Dec 20, 2018 2:21:36 PM Server main
+WARNING: Too many login attempts in one session!
+Dec 20, 2018 2:43:55 PM Server main
+SEVERE: Login was attempted with this email: CC@gmail.com but had wrong password. Added to failed login count.
+Dec 20, 2018 2:44:01 PM Server main
+WARNING: login success with this email: CC@gmail.com
+Dec 20, 2018 3:20:54 PM Server main
+INFO: Player creation attempted with this data: PLAYER:/EE/EE/EE@gmail.com/eeeeeee1
+Dec 20, 2018 3:20:55 PM Server main
+WARNING: Sign-Up success by: EE EEwith this email: EE@gmail.com
+Dec 20, 2018 3:21:09 PM Server main
+WARNING: login success with this email: EE@gmail.com
+Dec 20, 2018 3:21:44 PM Server main
+WARNING: login success with this email: AA@gmail.com
+Dec 20, 2018 3:22:34 PM Server main
+WARNING: Too many login attempts in one session!
+Dec 20, 2018 3:23:29 PM Server main
+INFO: Player creation attempted with this data: PLAYER:/GG/GG/GG@gmail.com/ggggggg1
+Dec 20, 2018 3:23:30 PM Server main
+WARNING: Sign-Up success by: GG GGwith this email: GG@gmail.com
+Dec 20, 2018 3:23:43 PM Server main
+WARNING: login success with this email: GG@gmail.com
+Dec 20, 2018 3:23:48 PM Server main
+INFO: Balance request made by: GG at emailID in player table = 5
+Dec 20, 2018 3:24:15 PM Server main
+INFO: Balance request made by: GG at emailID in player table = 5
+Dec 20, 2018 3:25:11 PM Server main
+WARNING: login success with this email: AA@gmail.com
+Dec 20, 2018 3:25:27 PM Server main
+WARNING: Too many login attempts in one session!
+Dec 26, 2018 7:50:41 AM Server main
+INFO: Player creation attempted with this data: PLAYER:/Sarah/Lewis/sarah_aberdare@yahoo.co.uk/ngmyBU56
+Dec 26, 2018 7:50:42 AM Server main
+WARNING: Sign-Up success by: Sarah Lewiswith this email: sarah_aberdare@yahoo.co.uk
+Dec 26, 2018 7:51:11 AM Server main
+WARNING: login success with this email: sarah_aberdare@yahoo.co.uk
+Dec 26, 2018 7:51:16 AM Server main
+INFO: Balance request made by: Sarah at emailID in player table = 6
+Dec 26, 2018 7:51:25 AM Server main
+INFO: Balance request made by: Sarah at emailID in player table = 6
+Dec 26, 2018 7:53:18 AM Server main
+WARNING: login success with this email: sarah_aberdare@yahoo.co.uk
+Dec 31, 2018 7:44:00 PM Server main
+INFO: Player creation attempted with this data: PLAYER:/mike/havey/mike@gmail.com/mmmmmmm1
+Dec 31, 2018 7:44:03 PM Server main
+WARNING: Sign-Up success by: mike haveywith this email: mike@gmail.com
+Dec 31, 2018 7:44:43 PM Server main
+WARNING: login success with this email: mike@gmail.com
+Dec 31, 2018 7:44:50 PM Server main
+INFO: Balance request made by: mike at emailID in player table = 7
+Dec 31, 2018 7:44:55 PM Server main
+INFO: Balance request made by: mike at emailID in player table = 7
