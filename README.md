@@ -7,7 +7,7 @@ You will need to run Server.java then Client.java in order to establish the SSL 
 
 **Threat model**
 
-We will assume that we are using the Dolev-Yao model, and that our admin is trusted.
+I am assuming that the attacked is one from the Dolev-Yao model, and that our admin is trusted.
 
 Threats:
 
