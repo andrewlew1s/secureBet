@@ -2,9 +2,14 @@
 I made this game simulator for a Systems Secuirty elective at Pomona College. 
 
 *How to run*
+
 You will need to run Server.java then Client.java in order to establish the SSL connection. If you actually want it to work you'll also need to create a mySQL database the same as it is set up for because I'm not paying to host one for a game nobody will play. See attached picture:
 
+![alt text](https://raw.githubusercontent.com/andrewlew1s/secureGame/master/mySQL Player.png)
+
+
 *Threat model*
+
 We will assume that we are using the Dolev-Yao model, and that our admin is trusted.
 
 Threats:
