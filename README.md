@@ -3,7 +3,7 @@ I made this secure game simulator for a Systems Secuirty elective at Pomona Coll
 
 **How to run**
 
-You will need to run Server.java then Client.java in order to establish the SSL connection. If you actually want it to work you'll also need to create a mySQL database the same as it is set up for because I'm not paying to host one for a game nobody will play. See pictures at the bottom of the README. You will also need to change the username and password in the getConnection() method in Database.java for what you set up in your database. 
+You will need to run Server.java then Client.java in order to establish the SSL connection. If you actually want it to work you'll also need to create a mySQL database the same as it is set up for because I'm not hosting one. See pictures at the bottom of the README. You will also need to change the username and password in the getConnection() method in Database.java for what you set up in your database. 
 
 **Threat model**
 
